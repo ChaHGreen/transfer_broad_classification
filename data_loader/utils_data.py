@@ -73,7 +73,11 @@ class SimpleDataset(torch.utils.data.Dataset):
         self.data, base_dataset_name, data_indices_suffix, mode = get_image_folder(
             dataset_name, data_path)
 
-        self.cls_to_idx = None
+        self.cls_to_idx = None  #确实是传到这里
+##这里 获得对应
+        self.cls_to_idx_1 = self.data.class_to_idx
+        loguru_log(f"Class to Label {self.cls_to_idx_1}")
+
         if 'partial' in data_indices_suffix or 'disjoint' in data_indices_suffix or 'overlap' in data_indices_suffix:
             tmpfile = os.path.join(
                 TMP_PATH, base_dataset_name +

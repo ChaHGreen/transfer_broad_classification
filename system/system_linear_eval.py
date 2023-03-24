@@ -193,12 +193,23 @@ class LightningSystem(system_abstract.LightningSystem):
         self.logger.log(f"mean_accuracy: {mean_accuracy: .4f}", "CRITICAL")
         ece_score = self.ece_calculate(epoch_probs, epoch_gt)
 
+        per_class_accuracy_1 = accuracy(epoch_preds,
+                                      epoch_gt,
+                                      num_classes=self.num_classes,
+                                      class_reduction='none') ##这个是返回各类精度
+
         info = {
             "acc_mean": mean_accuracy,
             "acc_per_class": per_class_accuracy,
             "mean_loss": mean_loss,
             "validation_ece": ece_score
         }
+        accuracy_log=''
+        for i in range(0,self.num_classes):
+            accuracy_log=accuracy_log+f'  |  {i} : {per_class_accuracy_1[i]:.4f}'
+            info[f'{i}']=per_class_accuracy_1[i]
+        self.logger.log(f'Class Accauracy: {accuracy_log}','CRITICAL')
+
         self.log_dict(info, logger=True, prog_bar=True)
 
         self.logger.log_csv(info, step=self.global_step)

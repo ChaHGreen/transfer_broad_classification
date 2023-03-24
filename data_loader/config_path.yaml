@@ -32,6 +32,34 @@ CropDisease:
   num_data: 54305
   split: 43456,10849
 
+##在这里 PaintingMaterial
+PaintingMaterial:
+  data_path: "~/datasets/cdfsl/PaintingMaterial"
+  num_class: 8
+  num_data: 1745
+  split: 1345,400  ##train val
+#  num_data: 2145
+#  split: 1498,647  ##train val
+
+Painter:
+  data_path: "~/datasets/cdfsl/Painter"
+  num_class: 2
+  num_data: 400
+  split: 280,120  ##train val
+
+Painter_FT:
+  data_path: "~/datasets/cdfsl/Painter_FT"
+  num_class: 2
+  num_data: 400
+  split: 280,120  ##train val
+
+Cut:
+  data_path: "~/datasets/cdfsl/Cut"
+  num_class: 2
+  num_data: 160
+  split: 114,46  ##train val
+
+
 DeepWeeds:
   data_path: "~/datasets/cdfsl/DeepWeeds"
   num_class: 9

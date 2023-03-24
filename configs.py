@@ -13,7 +13,7 @@ def config_parser(parent=None):
     else:
         parser = argparse.ArgumentParser()
 
-    parser.add_argument("--model_name", type=str, default="base")
+    parser.add_argument("--model_name", type=str, default="moco_mit")  ##原来是base
     parser.add_argument("--version", type=int, default=None)
 
     parser.add_argument("--system_mode",
@@ -28,16 +28,17 @@ def config_parser(parent=None):
 
     parser.add_argument("--system",
                         type=str,
-                        default="base_finetune",
+                        #default="moco_mit",
+                        default="base_finetune",    ##改0 system
                         help="the system/model to run")
 
     # ---------------------------------- dataset --------------------------------- #
     parser.add_argument('--dataset',
-                        default='miniImageNet_train',
+                        default='PaintingMaterial',  ##改1 训练集
                         type=str,
                         help='training dataset')
     parser.add_argument('--val_dataset',
-                        default='EuroSAT',
+                        default='PaintingMaterial',     ##改2 测试集
                         type=str,
                         help='val dataset to use')
     parser.add_argument('--train_aug',
@@ -49,14 +50,14 @@ def config_parser(parent=None):
     # -------------------------------- evaluation -------------------------------- #
     parser.add_argument("--eval_mode", type=str, default="linear")
 
-    parser.add_argument('--freeze_backbone', default='true')
+    parser.add_argument('--freeze_backbone', default='true')  ##应该是不freeze吧
     parser.add_argument('--num_workers', type=int, default=6)
     parser.add_argument("--mode",
                         type=str,
                         default="train",
                         choices=["train", "save_features", "test"])
     parser.add_argument("--seed", type=int, default=0)
-    parser.add_argument("--ckpt", type=str, default=None)
+    parser.add_argument("--ckpt", type=str, default="/common/home/ch1103/transfer_broad/data/last.pth")  ##改3 预训练模型
     parser.add_argument("--load_base",
                         action="store_true",
                         help="load only base backbone")
@@ -77,7 +78,7 @@ def config_parser(parent=None):
 
     # ----------------------------------- train ---------------------------------- #
     parser.add_argument("--image_size", type=int, default=224)
-    parser.add_argument("--lr", type=float, default=0.01)
+    parser.add_argument("--lr", type=float, default=0.001)  ##改4 学习率
     parser.add_argument("--batch_size", type=int, default=32)
     parser.add_argument("--val_batch_size", type=int, default=None)
     parser.add_argument("--use_norm", action="store_true")
@@ -88,7 +89,7 @@ def config_parser(parent=None):
         type=int,
         help='total number of classes in softmax, only used in baseline')
     parser.add_argument('--max_epochs',
-                        default=400,
+                        default=50,   ## 改5 训练批次
                         type=int,
                         help='Stopping epoch')
     parser.add_argument("--moco_K", type=int, default=64000)

@@ -521,6 +521,7 @@ class CropDisease(datasets.ImageFolder):
             path = os.path.join(data_root, 'all')
         super().__init__(path)
 
+<<<<<<< HEAD
 class Paintingseg3(datasets.ImageFolder):
     def __init__(self, data_root: str, mode='train'):
         if mode == 'train':
@@ -532,6 +533,8 @@ class Paintingseg3(datasets.ImageFolder):
         super().__init__(path)
       
 
+=======
+>>>>>>> c531dc55bf962009016bf05a8ab85b78a859e256
 ##和CropDisease一样的格式 使用相同的注册方法
 
 class PaintingMaterial(datasets.ImageFolder):

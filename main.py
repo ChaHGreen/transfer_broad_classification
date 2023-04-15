@@ -37,7 +37,7 @@ def main(params, LightningSystem, *args, **kwargs):
         if params.load_base and (params.system != 'base_finetune'
                                  or 'linear_eval' in params.system
                                  or 'linear_transfer' in params.system):
-            model.load_base(params.ckpt)
+            model.load_base(params.ckpt)   ##Linear eval/tansfer都在这里加载模型
         else:
             ckpt = torch.load(
                 params.ckpt,

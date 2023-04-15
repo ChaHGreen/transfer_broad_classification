@@ -4,6 +4,8 @@ import torch.nn.functional as F
 from system import system_abstract_moco
 from .utils_system import concat_all_gather, moco_accuracy
 
+## 论文里写t-SNE visualization在倒数第二层激活层   应该不是在分类层吧？
+
 
 # ---------------------------------------------------------------------------- #
 #                               lightning module                               #
@@ -105,7 +107,7 @@ class Feature_extractor(nn.Module):
         self.header = header
         self.opt = opt
 
-    def forward(self, x):
+    def forward(self, x):   ##多层感知机 mlp embed the encoded feature
         x_feat = self.backbone(x)
         if self.opt.moco_mlp_to_feature == 0:
             return x_feat
@@ -135,6 +137,7 @@ class Classifier_d(nn.Module):
                                   nn.Linear(dim_hidden, n_way))
         self.lin2 = nn.Sequential(nn.Linear(dim, dim_hidden), nn.ReLU(),
                                   nn.Linear(dim_hidden, n_way))
+
 
     def forward(self, x):
         x = self.dropout(x)

@@ -272,7 +272,7 @@ class LightningSystem(pl.LightningModule, FewShotMixin, LinearMixin):
             return
 
         # classifier head
-        if not self.hparams.linear_bn:
+        if not self.hparams.linear_bn:    ##线性分类层
             self.classifier = nn.Linear(self.feature.final_feat_dim, num_class)
         else:
             # add a batchnorm before classifier
@@ -310,8 +310,8 @@ class LightningSystem(pl.LightningModule, FewShotMixin, LinearMixin):
             elif "moco" in self.hparams.model:
                 resnet_head = getattr(
                     resnet_models,
-                    'resnet50')(pretrained=self.hparams.pretrained)
-
+                    'resnet50')(pretrained=self.hparams.pretrained)     ##这一个 torchvision里的
+                ## children出来了
                 encoder = nn.Sequential(*(list(resnet_head.children())[:-1] +
                                           [nn.Flatten()]))
                 encoder.final_feat_dim = resnet_head.fc.in_features

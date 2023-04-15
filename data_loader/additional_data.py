@@ -521,6 +521,60 @@ class CropDisease(datasets.ImageFolder):
             path = os.path.join(data_root, 'all')
         super().__init__(path)
 
+class Paintingseg3(datasets.ImageFolder):
+    def __init__(self, data_root: str, mode='train'):
+        if mode == 'train':
+            path = os.path.join(data_root, 'train')
+        elif mode == "test":
+            path = os.path.join(data_root, 'test')
+        else:
+            path = os.path.join(data_root, 'all')
+        super().__init__(path)
+      
+
+##和CropDisease一样的格式 使用相同的注册方法
+
+class PaintingMaterial(datasets.ImageFolder):
+    def __init__(self, data_root: str, mode='train'):
+        if mode == 'train':
+            path = os.path.join(data_root, 'train')
+        elif mode == "test":
+            path = os.path.join(data_root, 'test')
+        else:
+            path = os.path.join(data_root, 'all')
+        super().__init__(path)
+
+class Painter(datasets.ImageFolder):
+    def __init__(self, data_root: str, mode='train'):
+        if mode == 'train':
+            path = os.path.join(data_root, 'train')
+        elif mode == "test":
+            path = os.path.join(data_root, 'test')
+        else:
+            path = os.path.join(data_root, 'all')
+        super().__init__(path)
+
+class Painter_FT(datasets.ImageFolder):
+    def __init__(self, data_root: str, mode='train'):
+        if mode == 'train':
+            path = os.path.join(data_root, 'train')
+        elif mode == "test":
+            path = os.path.join(data_root, 'test')
+        else:
+            path = os.path.join(data_root, 'all')
+        super().__init__(path)
+
+class Cut(datasets.ImageFolder):
+    def __init__(self, data_root: str, mode='train'):
+        if mode == 'train':
+            path = os.path.join(data_root, 'train')
+        elif mode == "test":
+            path = os.path.join(data_root, 'test')
+        else:
+            path = os.path.join(data_root, 'all')
+        super().__init__(path)
+
+
 
 class ExDark(Dataset):
     def __init__(self, data_root: str, mode='train'):

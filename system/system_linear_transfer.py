@@ -227,9 +227,15 @@ class LightningSystem(system_abstract.LightningSystem):
         self.logger.log(
             f"Best metric ({self.val_names[0]}): {self.best_metric[0][0]} @ {self.best_metric[0][1]}",
             "INFO")
+        ##从这里开始加哈
+        per_class_accuracy_1 = accuracy(epoch_preds,
+                                      epoch_gt,
+                                      num_classes=self.num_classes,
+                                      class_reduction='none') ##这个是返回各类精度
 
-        # if self.hparams.report:  # print class-wise report
-        #     self.logger.log("\n" + self.aggr_class[0].get_report())
+        #if self.hparams.report:  # print class-wise report  
+           ##从这里开始加哈
+            #self.logger.log("\n" + self.aggr_class[0].get_report())
 
         self.logger.log(f"mean_accuracy: {mean_accuracy: .4f}", "CRITICAL")
         # self.aggr_class[0].reset()
@@ -243,6 +249,12 @@ class LightningSystem(system_abstract.LightningSystem):
             "mean_loss": mean_loss,
             "epoch": self.current_epoch
         }
+##这里
+        accuracy_log=''
+        for i in range(0,self.num_classes):
+            accuracy_log=accuracy_log+f'  |  {i} : {per_class_accuracy_1[i]:.4f}'
+            info[f'{i}']=per_class_accuracy_1[i]
+        self.logger.log(f'Class Accauracy: {accuracy_log}','CRITICAL')
         self.log_dict(info, logger=True, prog_bar=True)
 
         self.logger.log_csv(info, step=self.global_step)
